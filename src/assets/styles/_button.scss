@@ -1,0 +1,22 @@
+@use './functions' as func;
+
+.button {
+  margin-top: func.calc-sp(24);
+  border-radius: 30px;
+  font-size: 1rem;
+  padding: func.calc-sp(14);
+  min-width: 260px;
+  border: none;
+  background: linear-gradient(
+    to right,
+    var(--color-accent-gradation-start),
+    var(--color-accent-gradation-end)
+  );
+  color: var(--color-white);
+  cursor: pointer;
+  transition: box-shadow 0.3s;
+  border: solid 2px var(--color-white);
+  &:hover {
+    box-shadow: 0 3px 6px #c7c7c7;
+  }
+}

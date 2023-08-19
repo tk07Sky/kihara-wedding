@@ -1,0 +1,40 @@
+:root {
+  --max-width: 1100px;
+  --border-radius: 12px;
+  --color-white: #fff;
+  --color-accent: #b4f8e5;
+  --color-background-accent: #e5fbf7;
+  --color-accent-gradation-start: #64dbc1;
+  --color-accent-gradation-end: #ced29e;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN',
+    'Hiragino Sans', Meiryo, sans-serif;
+  color: #0d0d0d;
+}
+
+.galleryItem {
+  opacity: 0;
+}
+.galleryItem.active {
+  opacity: 1;
+  animation: galleryItemUp 0.5s both;
+}
+
+@keyframes galleryItemUp {
+  0% {
+    transform: rotateY(20deg) translate3d(0, 0, 0);
+    opacity: 0;
+  }
+  100% {
+    transform: rotateY(0) translate3d(0, 0, 0);
+    opacity: 100;
+  }
+}

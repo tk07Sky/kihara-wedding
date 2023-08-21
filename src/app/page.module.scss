@@ -154,12 +154,39 @@ $h2-mergin-bottom: #{func.calc-sp(24)};
     @include heading-text-gradation;
     @include heading-text-font-size;
   }
-  & > p {
-    font-size: func.calc-sp(38);
-    margin-top: func.calc-sp(8);
-    @media screen and (max-width: 767px) {
-      font-size: func.calc-sp(24);
-    }
+}
+.countDownContent {
+  max-width: func.calc-sp(358);
+  margin: 0 auto;
+  background: linear-gradient(45deg, #844db5, #64dbc1 40%, #fff718);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.countDownRow {
+  display: flex;
+  gap: func.calc-sp(24);
+  align-items: center;
+  justify-content: center;
+  &._last {
+    margin-top: func.calc-sp(16);
+  }
+}
+.countDownBox {
+  &._hours {
+    margin-left: func.calc-sp(16);
+    margin-right: func.calc-sp(4);
+  }
+}
+.countDownNumber {
+  font-size: func.calc-sp(40);
+  &._day {
+    font-size: func.calc-sp(56);
+  }
+}
+.countDownLabel {
+  font-size: func.calc-sp(24);
+  &._day {
+    font-size: func.calc-sp(40);
   }
 }
 

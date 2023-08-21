@@ -63,15 +63,19 @@ export default function Home() {
     return targetDateRef.current.getTime() - date.getTime();
   }, [date]);
   const day = useMemo(() => {
+    if (dateDiff <= 0) return 0;
     return Math.ceil(dateDiff / (24 * 60 * 60 * 1000));
   }, [dateDiff]);
   const hours = useMemo(() => {
+    if (dateDiff <= 0) return 0;
     return Math.floor(dateDiff / (60 * 60 * 1000)) % 60;
   }, [dateDiff]);
   const minutes = useMemo(() => {
+    if (dateDiff <= 0) return 0;
     return Math.floor(dateDiff / (60 * 1000)) % 60;
   }, [dateDiff]);
   const seconds = useMemo(() => {
+    if (dateDiff <= 0) return 0;
     return Math.floor(dateDiff / 1000) % 60;
   }, [dateDiff]);
 
@@ -154,15 +158,52 @@ export default function Home() {
 
       <section className={styles.countDown}>
         <h2 className={alphabetFonts.className}>Count down</h2>
-        <p className={alphabetFonts.className}>{day}Days</p>
-        <p className={alphabetFonts.className}>
-          {isMounted ? (
-            <>
-              {hours}Hours {('0' + minutes).slice(-2)}Minuts{' '}
-              {('0' + seconds).slice(-2)}Seconds
-            </>
-          ) : null}
-        </p>
+        <div className={styles.countDownContent}>
+          <div className={clsx(alphabetFonts.className, styles.countDownRow)}>
+            {isMounted ? (
+              <>
+                <div className={styles.countDownBox}>
+                  <div className={clsx(styles.countDownNumber, styles._day)}>
+                    {day}
+                  </div>
+                  <div className={clsx(styles.countDownLabel, styles._day)}>
+                    Days
+                  </div>
+                </div>
+              </>
+            ) : null}
+          </div>
+          <div
+            className={clsx(
+              alphabetFonts.className,
+              styles.countDownRow,
+              styles._last,
+            )}
+          >
+            {isMounted ? (
+              <>
+                <div className={clsx(styles.countDownBox, styles._hours)}>
+                  <div className={styles.countDownNumber}>
+                    {('0' + hours).slice(-2)}
+                  </div>
+                  <div className={styles.countDownLabel}>Hours</div>
+                </div>
+                <div className={clsx(styles.countDownBox, styles._minutes)}>
+                  <div className={styles.countDownNumber}>
+                    {('0' + minutes).slice(-2)}
+                  </div>
+                  <div className={styles.countDownLabel}>Minuts</div>
+                </div>
+                <div className={clsx(styles.countDownBox, styles._seconds)}>
+                  <div className={styles.countDownNumber}>
+                    {('0' + seconds).slice(-2)}
+                  </div>
+                  <div className={styles.countDownLabel}>Seconds</div>
+                </div>
+              </>
+            ) : null}
+          </div>
+        </div>
       </section>
 
       <section className={styles.photos}>
@@ -182,14 +223,14 @@ export default function Home() {
             </SplideSlide>
           ))}
         </Splide>
-        <Link href="/photos">
-          <button
-            type="button"
+        <div>
+          <Link
+            href="/photos"
             className={clsx(baseFont.className, styles.button)}
           >
-            もっと見る
-          </button>
-        </Link>
+            <span>もっと見る</span>
+          </Link>
+        </div>
       </section>
 
       <section className={styles.information}>
@@ -197,9 +238,9 @@ export default function Home() {
         <h3>挙式・披露宴</h3>
         <p className={styles.informationDate}>11月12日（日）</p>
         <h4>挙式</h4>
-        <p>11時00分（受付 10時30分）</p>
+        <p>11時30分（受付 10時30分）</p>
         <h4>披露宴</h4>
-        <p>12時00分（受付 11時30分）</p>
+        <p>12時30分</p>
         <hr />
         <h3>アクセス</h3>
         <p>会場：カノビアーノ福岡</p>
@@ -219,7 +260,7 @@ export default function Home() {
         <h2 className={alphabetFonts.className}>Presense or Absence</h2>
         <p>
           {`お手数ではございますが
-          ◯月◯日までにご回答くださいますよう
+          2023年10月6日までにご回答くださいますよう
           お願い申し上げます`}
         </p>
         <button

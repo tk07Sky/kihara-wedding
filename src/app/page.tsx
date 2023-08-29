@@ -45,6 +45,15 @@ export default function Home() {
   const targetDateRef = useRef<Date>(new Date('2023-11-12 11:00:00'));
   const [isMounted, setIsMounted] = useState<boolean>(false);
   useEffect(() => {
+    console.log(`
+ケコーン シマシタ!　　　
+　 ∧ ∧　　＠∧,,∧＠
+(, ゜Д゜)(*゜ー゜)
+　| <∞> @@*@@
+　|U..V |⊃⊂　　 ⊃
+@|　： | ／∞　　∞＼
+..Ｕ..Ｕ 〜〜〜〜〜〜
+    `);
     setTimerId(
       setInterval(() => {
         setDate(new Date());

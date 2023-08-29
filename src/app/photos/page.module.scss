@@ -62,9 +62,12 @@
   overflow: hidden;
 }
 .galleryItemImg {
-  width: 100%;
-  height: auto;
-  vertical-align: bottom;
+  source,
+  img {
+    width: 100%;
+    height: auto;
+    vertical-align: bottom;
+  }
 }
 
 .footer {

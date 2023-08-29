@@ -5,6 +5,7 @@ import styles from './page.module.scss';
 import clsx from 'clsx';
 import { useCallback, useEffect, useState } from 'react';
 import { PhotoItem, photoList } from '@/constants/photo-list';
+import Link from 'next/link';
 
 const waList: PhotoItem[] = photoList.filter((photoItem) =>
   photoItem.src.includes('/wa/wa_'),
@@ -57,12 +58,21 @@ export default function Photos() {
               key={waItem.src}
               className={clsx(styles.galleryItem, 'galleryItem')}
             >
-              <img
-                loading="lazy"
-                className={styles.galleryItemImg}
-                src={waItem.src}
-                alt={waItem.alt}
-              />
+              <picture className={styles.galleryItemImg}>
+                <source
+                  type="image/webp"
+                  width={waItem.width}
+                  height={waItem.height}
+                  srcSet={waItem.src + '.webp'}
+                />
+                <img
+                  loading="lazy"
+                  src={waItem.src + '.jpg'}
+                  width={waItem.width}
+                  height={waItem.height}
+                  alt={waItem.alt}
+                />
+              </picture>
             </li>
           ))}
         </ul>
@@ -77,24 +87,29 @@ export default function Photos() {
               key={yoItem.src}
               className={clsx(styles.galleryItem, 'galleryItem')}
             >
-              <img
-                loading="lazy"
-                className={styles.galleryItemImg}
-                src={yoItem.src}
-                alt={yoItem.alt}
-              />
+              <picture className={styles.galleryItemImg}>
+                <source
+                  type="image/webp"
+                  width={yoItem.width}
+                  height={yoItem.height}
+                  srcSet={yoItem.src + '.webp'}
+                />
+                <img
+                  loading="lazy"
+                  src={yoItem.src + '.jpg'}
+                  width={yoItem.width}
+                  height={yoItem.height}
+                  alt={yoItem.alt}
+                />
+              </picture>
             </li>
           ))}
         </ul>
       </section>
       <div className={styles.footer}>
-        <button
-          type="button"
-          className={clsx(baseFont.className, styles.button)}
-          onClick={goBack}
-        >
-          前の画面に戻る
-        </button>
+        <Link href="/" className={clsx(baseFont.className, styles.button)}>
+          <span>前の画面に戻る</span>
+        </Link>
       </div>
     </div>
   );

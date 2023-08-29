@@ -11,16 +11,16 @@ import Link from 'next/link';
 import { PhotoItem, photoList } from '@/constants/photo-list';
 
 const slideImageSrcList = [
-  '/wa/wa_01.jpg',
-  '/wa/wa_04.jpg',
-  '/wa/wa_06.jpg',
-  '/wa/wa_11.jpg',
-  '/wa/wa_21.jpg',
-  '/yo/yo_01.jpg',
-  '/yo/yo_11.jpg',
-  '/yo/yo_14.jpg',
-  '/yo/yo_18.jpg',
-  '/yo/yo_31.jpg',
+  '/wa/wa_01',
+  '/wa/wa_04',
+  '/wa/wa_06',
+  '/wa/wa_11',
+  '/wa/wa_21',
+  '/yo/yo_01',
+  '/yo/yo_11',
+  '/yo/yo_14',
+  '/yo/yo_18',
+  '/yo/yo_31',
 ];
 
 const slideImages: PhotoItem[] = slideImageSrcList.reduce<PhotoItem[]>(
@@ -38,7 +38,7 @@ const slideImages: PhotoItem[] = slideImageSrcList.reduce<PhotoItem[]>(
 
 export default function Home() {
   const goGoogleForms = useCallback(() => {
-    window.open('https://forms.gle/6kNGm3QWj3PWrB6G6', '_system');
+    window.open('https://forms.gle/6kNGm3QWj3PWrB6G6', '_blank');
   }, []);
   const [date, setDate] = useState<Date>(new Date());
   const [timerId, setTimerId] = useState<NodeJS.Timer | null>(null);
@@ -68,7 +68,7 @@ export default function Home() {
   }, [dateDiff]);
   const hours = useMemo(() => {
     if (dateDiff <= 0) return 0;
-    return Math.floor(dateDiff / (60 * 60 * 1000)) % 60;
+    return Math.floor(dateDiff / (60 * 60 * 1000)) % 24;
   }, [dateDiff]);
   const minutes = useMemo(() => {
     if (dateDiff <= 0) return 0;
@@ -82,7 +82,16 @@ export default function Home() {
   return (
     <>
       <div className={styles.mainVisual}>
-        <img className={styles.mainVisualImg} src="/main-visual.jpg" alt="" />
+        <picture className={styles.mainVisualImg}>
+          <source
+            type="image/webp"
+            width="2400"
+            height="1600"
+            srcSet="/main-visual.webp"
+          />
+          <img src="/main-visual.jpg" width="2400" height="1600" alt="" />
+        </picture>
+
         <h1 className={clsx(styles.mainVisualTitle, alphabetFonts.className)}>
           <div>Welcome to our</div>
           <div>Wedding</div>
@@ -123,7 +132,20 @@ export default function Home() {
         <h2>私達の紹介</h2>
         <div className={styles.introductionItemTaiki}>
           <div className={styles.introductionItemImg}>
-            <img src="/introduction-taiki.jpg" alt="" />
+            <picture>
+              <source
+                type="image/webp"
+                width="1200"
+                height="1200"
+                srcSet="/introduction-taiki.webp"
+              />
+              <img
+                src="/introduction-taiki.jpg"
+                width="1200"
+                height="1200"
+                alt=""
+              />
+            </picture>
           </div>
         </div>
         <div className={styles.introductionItemText}>
@@ -139,7 +161,20 @@ export default function Home() {
         </div>
         <div className={styles.introductionItemSae}>
           <div className={styles.introductionItemImg}>
-            <img src="/introduction-sae.jpg" alt="" />
+            <picture>
+              <source
+                type="image/webp"
+                width="1200"
+                height="1200"
+                srcSet="/introduction-sae.webp"
+              />
+              <img
+                src="/introduction-sae.jpg"
+                width="1200"
+                height="1200"
+                alt=""
+              />
+            </picture>
           </div>
         </div>
         <div className={styles.introductionItemText}>
@@ -215,11 +250,21 @@ export default function Home() {
         >
           {slideImages.map((slideImage) => (
             <SplideSlide key={slideImage.src}>
-              <img
-                className={styles.photoItem}
-                src={slideImage.src}
-                alt={slideImage.alt}
-              />
+              <picture className={styles.photoItem}>
+                <source
+                  type="image/webp"
+                  width={slideImage.width}
+                  height={slideImage.height}
+                  srcSet={slideImage.src + '.webp'}
+                />
+                <img
+                  loading="lazy"
+                  src={slideImage.src + '.jpg'}
+                  width={slideImage.width}
+                  height={slideImage.height}
+                  alt={slideImage.alt}
+                />
+              </picture>
             </SplideSlide>
           ))}
         </Splide>

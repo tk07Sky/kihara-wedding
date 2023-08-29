@@ -258,7 +258,6 @@ export default function Home() {
                   srcSet={slideImage.src + '.webp'}
                 />
                 <img
-                  loading="lazy"
                   src={slideImage.src + '.jpg'}
                   width={slideImage.width}
                   height={slideImage.height}

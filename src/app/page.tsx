@@ -73,7 +73,7 @@ export default function Home() {
   }, [date]);
   const day = useMemo(() => {
     if (dateDiff <= 0) return 0;
-    return Math.ceil(dateDiff / (24 * 60 * 60 * 1000));
+    return Math.ceil(dateDiff / (24 * 60 * 60 * 1000)) - 1;
   }, [dateDiff]);
   const hours = useMemo(() => {
     if (dateDiff <= 0) return 0;
